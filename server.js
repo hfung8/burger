@@ -2,7 +2,7 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var methodOverride = require('method-override');
 var app = express();
-var PORT = process.env.PORT || 8080;
+var PORT = process.env.PORT || 3306;
 
 app.use(bodyParser.urlencoded({
 	extended: false
