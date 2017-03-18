@@ -8,21 +8,15 @@ var burger = {
 		})	
 	},
 	addBurger : function(name,callback){
-		ormObject.insertOne(name,callback, function(result){
+		ormObject.create("burgers",name,callback, function(result){
 		callback(result);
 		})
 	},
-	updateBurger : function(newBurger,idInput,callback){
-		ormObject.updateOne(newBurger,idInput,callback, function(result){
+	updateBurger : function(id,callback){
+		ormObject.updateOne("burgers",id,callback, function(result){
 		callback(result);
-		})
-	},
-	deleteBurger : function(name,idInput,callback){
-		ormObject.deleteOne(name,idInput,callback, function(result){
-			callback(result);
 		})
 	}
 };
 
 module.exports = burger;
-

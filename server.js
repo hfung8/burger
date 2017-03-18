@@ -4,6 +4,7 @@ var methodOverride = require('method-override');
 var app = express();
 var PORT = process.env.PORT || 3306;
 
+app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
 	extended: false
 }));

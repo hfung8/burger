@@ -2,36 +2,26 @@ var express = require("express");
 var router = express.Router();
 var burger = require("../models/burger.js");
 
-router.get("/index", function(req,res){
-	burger.selectBurgers(function(data){
-		var hdbsObject = {
-			burgers: data
-		};
-		res.render("index", hdbsObject);
+router.get("/", function(req,res){
+	burger.selectBurgers(function(burger_data){
+		console.log(burger_data)
+		res.render("index", {burger_data});
 	});
 });
 
-router.post("/addburger", function(req,res){
-	var burgerType = req.body.burgerType;
-	burger.addBurger(burgerType,function(){
-		res.redirect("/index");
+router.post("/burgers/create", function(req,res){
+	burger.addBurger(req.body.burger_name,function(result){
+		res.redirect("/");
 	});
 });
 
-router.put("/:id", function(req,res){
-	var condition = "id = " + req.params.id;
-	console.log("condition," + condition);
-	burger.updateBurger(condition,function(){
-		res.redirect("/index");
+router.put("/burgers/update", function(req,res){
+	burger.updateBurger(req.body.burger_id, function(result){
+		console.log(result);
+		res.redirect("/");
 	});
 });
 
-router.delete("/:id", function(req,res){
-	var condition = "id = " + req.params.id;
-	burger.deleteBurger(condition, function(){
-		res.redirect("/index");
-	});
-});
 // router.post("/index", function(req,res){
 // 	burger.updateBurger([
 // 		"Bacon Cheeseburger"], [

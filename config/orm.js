@@ -10,8 +10,8 @@ var ormObject = {
 			callback(result);
 		});
 	},
-	insertOne: function(name,callback){
-		var s = "INSERT INTO burgers (burger_name) VALUES ('"+ name +"');";
+	create: function(tableInput,val,callback){
+		var s = "INSERT INTO " + tableInput + " (burger_name) VALUES ('"+val+"');";
 		connection.query(s,function(err,result){
 				if (err){
 				throw err;
@@ -19,19 +19,10 @@ var ormObject = {
 			callback(result);
 		});
 	},
-	updateOne: function(newBurger,idInput,callback){
-		var s = "UPDATE burgers SET burger_name = '" + newBurger + "' WHERE id = ?;";
-		connection.query(s,[idInput], function(err,result){
+	updateOne: function(tableInput,condition,callback){
+		var s = "UPDATE " + tableInput + " SET devoured=true WHERE id ="+condition+";";
+		connection.query(s, function(err,result){
 				if (err){
-				throw err;
-			}
-			callback(result);
-		})
-	},
-	deleteOne: function(name,idInput,callback){
-		var s = "DELETE FROM burgers '" + name + "'WHERE id = ?;";
-		connection.query(s,[idInput], function(err,result){
-			if (err){
 				throw err;
 			}
 			callback(result);
